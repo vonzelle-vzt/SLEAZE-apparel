@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+:root {
+  --dark-gray: #1a1a1a;
+  --red: #c41e3a;
+  --cream: #f5f5dc;
+  --background: var(--dark-gray);
+  --foreground: var(--cream);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-dark-gray: var(--dark-gray);
+  --color-red: var(--red);
+  --color-cream: var(--cream);
+  --font-sans: var(--font-bebas);
+  --font-body: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 245, 220, 0.1);
+}
+
+.glass-light {
+  background: rgba(245, 245, 220, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 245, 220, 0.2);
+}
+
+.glass-red {
+  background: rgba(196, 30, 58, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 30, 58, 0.3);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* SLEAZE brand text styling */
+.sleaze-text {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-style: italic;
+  transform: skewX(-5deg);
+  text-shadow: 
+    3px 3px 0 var(--red),
+    6px 6px 0 rgba(26, 26, 26, 0.8);
+}
+
+.sleaze-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: var(--red);
+  opacity: 0.4;
+  z-index: -1;
+  filter: blur(1px);
+}
+
+.sleaze-text-hero {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  transform: skewX(-6deg);
+  background: linear-gradient(
+    180deg,
+    var(--cream) 0%,
+    rgba(245, 245, 220, 0.9) 40%,
+    rgba(196, 30, 58, 0.8) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(4px 4px 0 var(--red)) drop-shadow(8px 8px 0 rgba(26, 26, 26, 0.6));
+  animation: sleaze-pulse 3s ease-in-out infinite;
+}
+
+.sleaze-text-hero::before {
+  content: 'SLEAZE';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(196, 30, 58, 0.3) 0%,
+    rgba(26, 26, 26, 0.5) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translate(6px, 6px);
+  z-index: -1;
+  filter: blur(2px);
+}
+
+@keyframes sleaze-pulse {
+  0%, 100% {
+    filter: drop-shadow(4px 4px 0 var(--red)) drop-shadow(8px 8px 0 rgba(26, 26, 26, 0.6));
+  }
+  50% {
+    filter: drop-shadow(4px 4px 8px var(--red)) drop-shadow(8px 8px 0 rgba(26, 26, 26, 0.6));
+  }
+}
+
+/* Street section glassmorphism text */
+.sleaze-street-text {
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(196, 30, 58, 0.6) 0%,
+    rgba(26, 26, 26, 0.7) 50%,
+    rgba(245, 245, 220, 0.3) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 245, 220, 0.2);
+  color: var(--cream);
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(196, 30, 58, 0.3);
+  letter-spacing: 0.1em;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(245, 245, 220, 0.1),
+    inset 0 -1px 0 rgba(196, 30, 58, 0.2);
+}
+
+/* Hover glow effect */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(196, 30, 58, 0.4);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 4px;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--red);
+  color: var(--cream);
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(196, 30, 58, 0.6);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
