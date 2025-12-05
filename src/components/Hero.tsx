@@ -37,7 +37,7 @@ export function Hero() {
         </h1>
 
         <p className="opacity-0 animate-fade-in-up stagger-2 mt-4 text-xl sm:text-2xl text-cream/60 max-w-xl tracking-wide">
-          Urban streetwear for the bold. Extreme sports inspired.
+          Where Fashion Meets Community and Culture
         </p>
 
         <div className="opacity-0 animate-fade-in-up stagger-3 flex flex-col sm:flex-row gap-4 mt-10">
@@ -67,7 +67,7 @@ export function Hero() {
 
       {/* Side text */}
       <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
-        <span className="text-cream/20 tracking-[0.5em] text-sm">EXTREME SPORTS</span>
+        <span className="text-cream/20 tracking-[0.5em] text-sm">LIVE LIFE</span>
       </div>
       <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 origin-center">
         <span className="text-cream/20 tracking-[0.5em] text-sm">URBAN CULTURE</span>
