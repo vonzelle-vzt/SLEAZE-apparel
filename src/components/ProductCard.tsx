@@ -28,9 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
             src={primaryImage.url}
             alt={primaryImage.alt_text || product.name}
             fill
-            className={`object-cover transition-all duration-500 ${
-              isHovered && secondaryImage ? 'opacity-0' : 'opacity-100'
-            } group-hover:scale-105`}
+            className="object-cover transition-all duration-500 group-hover:scale-105"
           />
         )}
         {secondaryImage && (
@@ -44,8 +42,8 @@ export function ProductCard({ product }: ProductCardProps) {
           />
         )}
         
-        {/* Quick view overlay */}
-        <div className="absolute inset-0 bg-dark-gray/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        {/* Quick view overlay - shows primary image */}
+        <div className="absolute inset-0 bg-dark-gray/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
           <span className="px-6 py-3 glass text-cream font-[family-name:var(--font-bebas)] tracking-wider">
             QUICK VIEW
           </span>

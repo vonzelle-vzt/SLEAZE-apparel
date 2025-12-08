@@ -25,7 +25,7 @@ export function Hero() {
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
         <div className="opacity-0 animate-fade-in-up">
           <span className="inline-block px-4 py-2 glass-red rounded-full text-sm text-cream/80 tracking-wider mb-6">
-            NEW DROP AVAILABLE
+            Clothing and Apparel
           </span>
         </div>
 

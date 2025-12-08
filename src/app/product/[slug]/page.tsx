@@ -5,33 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-
-// Mock product data
-const mockProduct = {
-  id: '1',
-  shopify_product_id: 'gid://shopify/Product/1',
-  name: 'SLEAZE UFO HOODIE',
-  slug: 'sleaze-ufo-hoodie',
-  description: 'Premium heavyweight washed black hoodie featuring our iconic UFO graphic. Made from 100% cotton with a relaxed fit for ultimate comfort. The vintage wash gives each piece a unique character.',
-  price: 89.99,
-  compare_at_price: null as number | null,
-  category: 'mens' as const,
-  featured: true,
-  active: true,
-  created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString(),
-  product_images: [
-    { id: '1', product_id: '1', url: '/products/ufo-hoodie.jpg', alt_text: 'UFO Hoodie Front', position: 0, is_primary: true },
-    { id: '2', product_id: '1', url: '/products/ufo-hoodie-back.jpg', alt_text: 'UFO Hoodie Back', position: 1, is_primary: false },
-  ],
-  product_variants: [
-    { id: '1', product_id: '1', shopify_variant_id: 'v1', size: 'S', sku: 'UFO-S', inventory_count: 10, created_at: new Date().toISOString() },
-    { id: '2', product_id: '1', shopify_variant_id: 'v2', size: 'M', sku: 'UFO-M', inventory_count: 15, created_at: new Date().toISOString() },
-    { id: '3', product_id: '1', shopify_variant_id: 'v3', size: 'L', sku: 'UFO-L', inventory_count: 12, created_at: new Date().toISOString() },
-    { id: '4', product_id: '1', shopify_variant_id: 'v4', size: 'XL', sku: 'UFO-XL', inventory_count: 8, created_at: new Date().toISOString() },
-    { id: '5', product_id: '1', shopify_variant_id: 'v5', size: 'XXL', sku: 'UFO-XXL', inventory_count: 5, created_at: new Date().toISOString() },
-  ],
-};
+import { getProductBySlug } from '@/data/products';
+import { notFound } from 'next/navigation';
 
 const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
@@ -46,8 +21,12 @@ export default function ProductPage({ params }: Props) {
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
 
-  // In production, fetch product by slug
-  const product = mockProduct;
+  const product = getProductBySlug(slug);
+  
+  if (!product) {
+    notFound();
+  }
+
   const images = product.product_images || [];
 
   const handleAddToCart = () => {
@@ -266,4 +245,3 @@ export default function ProductPage({ params }: Props) {
     </div>
   );
 }
-
