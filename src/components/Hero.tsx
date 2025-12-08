@@ -59,8 +59,9 @@ export function Hero() {
       {/* Scroll indicator */}
       <button
         onClick={scrollToHotPicks}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/40 hover:text-cream transition-colors animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/40 hover:text-cream transition-colors animate-bounce z-20 cursor-pointer"
         aria-label="Scroll to Hot Picks"
+        type="button"
       >
         <ChevronDown size={32} />
       </button>
