@@ -8,7 +8,8 @@ import { useCart } from '@/context/CartContext';
 import { getProductBySlug } from '@/data/products';
 import { notFound } from 'next/navigation';
 
-const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+const mensSizes = ['S', 'M', 'L', 'XL', 'XXL'];
+const womensSizes = ['S', 'M', 'L', 'XL'];
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -165,7 +166,7 @@ export default function ProductPage({ params }: Props) {
                 </button>
               </div>
               <div className="flex flex-wrap gap-3">
-                {sizes.map((size) => (
+                {(product.category === 'womens' ? womensSizes : mensSizes).map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
