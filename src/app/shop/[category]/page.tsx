@@ -1,6 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ProductGrid } from '@/components/ProductGrid';
@@ -32,7 +29,6 @@ const categories = [
 ];
 
 const mockProducts: Product[] = [
-  // Row 1: Sleaze Tee, Blow My Mind Tee, Blow My Mind Hoodie, Eat-Sleep-Think-Cash Tee
   {
     id: '1',
     shopify_product_id: 'gid://shopify/Product/1',
@@ -97,7 +93,6 @@ const mockProducts: Product[] = [
     product_images: [{ id: '4', product_id: '4', url: '/products/image3.png', alt_text: 'Eat Sleep Think Cash Tee', position: 0, is_primary: true }],
     product_variants: []
   },
-  // Row 2: I Do Very Bad Things Hoodie, Mad Mon Tee, SLEAZE Mad Mon Tee, CheapWork Hoodie
   {
     id: '5',
     shopify_product_id: 'gid://shopify/Product/5',
@@ -162,7 +157,6 @@ const mockProducts: Product[] = [
     product_images: [{ id: '8', product_id: '8', url: '/products/image7.png', alt_text: 'CheapWork Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
-  // Row 3: SLEAZE Joker Tee, SLEAZE Racer Hoodie, All Eyes On Me Hoodie, SLEAZED Out Gym Hoodie
   {
     id: '9',
     shopify_product_id: 'gid://shopify/Product/9',
@@ -227,7 +221,6 @@ const mockProducts: Product[] = [
     product_images: [{ id: '12', product_id: '12', url: '/products/image13.jpeg', alt_text: 'SLEAZED Out Gym Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
-  // Row 4: SLEAZE Zip-up Hoodie (merged), Dr. Sleaze Crew Sweatshirt, Dogs Gotta Eat Hoodie, SLEAZE Martian Hoodie
   {
     id: '13',
     shopify_product_id: 'gid://shopify/Product/13',
@@ -295,7 +288,6 @@ const mockProducts: Product[] = [
     product_images: [{ id: '16', product_id: '16', url: '/products/image20.png', alt_text: 'SLEAZE Martian Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
-  // Row 5: SLEAZE UFO Hoodie, Xtreme Sports Long Sleeve (merged)
   {
     id: '17',
     shopify_product_id: 'gid://shopify/Product/17',
@@ -331,7 +323,6 @@ const mockProducts: Product[] = [
     ],
     product_variants: []
   },
-  // Xtreme category products
   {
     id: '19',
     shopify_product_id: 'gid://shopify/Product/19',
