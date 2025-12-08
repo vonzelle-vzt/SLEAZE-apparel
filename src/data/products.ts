@@ -343,7 +343,6 @@ export const allProducts: Product[] = [
     ],
     product_variants: createVariants('18', 'XSLS'),
   },
-  // XTREME category products
   {
     id: '19',
     shopify_product_id: 'gid://shopify/Product/19',
@@ -379,6 +378,22 @@ export const allProducts: Product[] = [
     product_images: [{ id: '20', product_id: '20', url: '/products/image10.jpeg', alt_text: 'SLEAZE Racer Hoodie', position: 0, is_primary: true }],
     product_variants: createVariants('20', 'SRHX'),
   },
+  {
+    id: '21',
+    shopify_product_id: 'gid://shopify/Product/21',
+    name: "DON'T CRASH TEE",
+    slug: 'dont-crash-tee',
+    description: "Don't Crash Tee. Bold statement on premium oversized cotton.",
+    price: 49.99,
+    compare_at_price: null,
+    category: 'mens',
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [{ id: '21', product_id: '21', url: '/products/image24.png', alt_text: "Don't Crash Tee", position: 0, is_primary: true }],
+    product_variants: createVariants('21', 'DCT'),
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
@@ -392,4 +407,3 @@ export function getAllProducts(): Product[] {
 export function getFeaturedProducts(): Product[] {
   return allProducts.filter(p => p.featured);
 }
-
