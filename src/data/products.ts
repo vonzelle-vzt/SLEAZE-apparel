@@ -343,6 +343,42 @@ export const allProducts: Product[] = [
     ],
     product_variants: createVariants('18', 'XSLS'),
   },
+  // XTREME category products
+  {
+    id: '19',
+    shopify_product_id: 'gid://shopify/Product/19',
+    name: 'XTREME SPORTS LONG SLEEVE',
+    slug: 'xtreme-sports-long-sleeve-xtreme',
+    description: 'Xtreme Sports Long Sleeve. Built for extreme action and adventure.',
+    price: 59.99,
+    compare_at_price: null,
+    category: 'xtreme',
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [
+      { id: '19a', product_id: '19', url: '/products/image22.png', alt_text: 'Xtreme Sports Long Sleeve Back', position: 0, is_primary: true },
+      { id: '19b', product_id: '19', url: '/products/image23.png', alt_text: 'Xtreme Sports Long Sleeve Front', position: 1, is_primary: false }
+    ],
+    product_variants: createVariants('19', 'XSLSX'),
+  },
+  {
+    id: '20',
+    shopify_product_id: 'gid://shopify/Product/20',
+    name: 'SLEAZE RACER HOODIE',
+    slug: 'sleaze-racer-hoodie-xtreme',
+    description: 'SLEAZE Racer graphic hoodie. Racing inspired extreme gear.',
+    price: 89.99,
+    compare_at_price: null,
+    category: 'xtreme',
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [{ id: '20', product_id: '20', url: '/products/image10.jpeg', alt_text: 'SLEAZE Racer Hoodie', position: 0, is_primary: true }],
+    product_variants: createVariants('20', 'SRHX'),
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

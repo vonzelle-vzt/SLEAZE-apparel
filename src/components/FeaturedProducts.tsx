@@ -9,7 +9,7 @@ type FeaturedProductsProps = {
 
 export function FeaturedProducts({ products }: FeaturedProductsProps) {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-gray to-dark-gray/95">
+    <section id="hot-picks" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-gray to-dark-gray/95">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
           <div>

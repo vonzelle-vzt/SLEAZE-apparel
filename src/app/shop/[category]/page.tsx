@@ -3,24 +3,27 @@ import { getProducts } from '@/lib/supabase';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-const validCategories = ['mens', 'womens', 'new'];
+const validCategories = ['mens', 'womens', 'new', 'xtreme'];
 
 const categoryLabels: Record<string, string> = {
   mens: 'MENS',
   womens: 'WOMENS',
   new: 'NEW ARRIVALS',
+  xtreme: 'XTREME',
 };
 
 const categoryDescriptions: Record<string, string> = {
   mens: 'Bold streetwear for the modern man',
   womens: 'Fierce fashion for fearless women',
   new: 'Fresh styles just landed',
+  xtreme: 'Built for the extreme',
 };
 
 const categories = [
   { slug: '', label: 'SHOP' },
   { slug: 'mens', label: 'MENS' },
   { slug: 'womens', label: 'WOMENS' },
+  { slug: 'xtreme', label: 'XTREME' },
   { slug: 'new', label: 'NEW ARRIVALS' },
 ];
 
@@ -320,6 +323,42 @@ const mockProducts = [
     ],
     product_variants: []
   },
+  // XTREME category products
+  {
+    id: '19',
+    shopify_product_id: 'gid://shopify/Product/19',
+    name: 'XTREME SPORTS LONG SLEEVE',
+    slug: 'xtreme-sports-long-sleeve-xtreme',
+    description: 'Xtreme Sports Long Sleeve - Built for extreme action',
+    price: 59.99,
+    compare_at_price: null,
+    category: 'xtreme' as const,
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [
+      { id: '19a', product_id: '19', url: '/products/image22.png', alt_text: 'Xtreme Sports Long Sleeve Back', position: 0, is_primary: true },
+      { id: '19b', product_id: '19', url: '/products/image23.png', alt_text: 'Xtreme Sports Long Sleeve Front', position: 1, is_primary: false }
+    ],
+    product_variants: []
+  },
+  {
+    id: '20',
+    shopify_product_id: 'gid://shopify/Product/20',
+    name: 'SLEAZE RACER HOODIE',
+    slug: 'sleaze-racer-hoodie-xtreme',
+    description: 'SLEAZE Racer graphic hoodie - Racing inspired extreme gear',
+    price: 89.99,
+    compare_at_price: null,
+    category: 'xtreme' as const,
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [{ id: '20', product_id: '20', url: '/products/image10.jpeg', alt_text: 'SLEAZE Racer Hoodie', position: 0, is_primary: true }],
+    product_variants: []
+  },
 ];
 
 type Props = {
@@ -352,6 +391,11 @@ export default async function CategoryPage({ params }: Props) {
 
   if (products.length === 0) {
     products = mockProducts;
+  }
+
+  // Filter by xtreme category if on xtreme page
+  if (category === 'xtreme') {
+    products = products.filter(p => p.category === 'xtreme');
   }
 
   const label = categoryLabels[category];

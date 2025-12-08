@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 
 export function Hero() {
-  const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth',
-    });
+  const scrollToHotPicks = () => {
+    const hotPicks = document.getElementById('hot-picks');
+    if (hotPicks) {
+      hotPicks.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -58,9 +58,9 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <button
-        onClick={scrollToContent}
+        onClick={scrollToHotPicks}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/40 hover:text-cream transition-colors animate-bounce"
-        aria-label="Scroll down"
+        aria-label="Scroll to Hot Picks"
       >
         <ChevronDown size={32} />
       </button>
