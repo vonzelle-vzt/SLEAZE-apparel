@@ -391,7 +391,7 @@ export const allProducts: Product[] = [
     active: true,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-    product_images: [{ id: '21', product_id: '21', url: "/products/Don't Crash.png", alt_text: "Don't Crash Tee", position: 0, is_primary: true }],
+    product_images: [{ id: '21', product_id: '21', url: '/products/image24.png', alt_text: "Don't Crash Tee", position: 0, is_primary: true }],
     product_variants: createVariants('21', 'DCT'),
   },
 ];
