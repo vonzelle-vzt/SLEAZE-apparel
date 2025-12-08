@@ -4,9 +4,10 @@ import type { Product } from '@/lib/supabase';
 type ProductGridProps = {
   products: Product[];
   title?: string;
+  fromCategory?: string;
 };
 
-export function ProductGrid({ products, title }: ProductGridProps) {
+export function ProductGrid({ products, title, fromCategory }: ProductGridProps) {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -28,7 +29,7 @@ export function ProductGrid({ products, title }: ProductGridProps) {
                 className="opacity-0 animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <ProductCard product={product} />
+                <ProductCard product={product} fromCategory={fromCategory} />
               </div>
             ))}
           </div>

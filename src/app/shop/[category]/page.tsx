@@ -433,7 +433,7 @@ export default async function CategoryPage({ params }: Props) {
         </div>
       </div>
 
-      <ProductGrid products={products} />
+      <ProductGrid products={products} fromCategory={category} />
     </div>
   );
 }

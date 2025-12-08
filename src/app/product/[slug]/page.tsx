@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { getProductBySlug } from '@/data/products';
-import { notFound } from 'next/navigation';
+import { notFound, useSearchParams } from 'next/navigation';
 
 const mensSizes = ['S', 'M', 'L', 'XL', 'XXL'];
 const womensSizes = ['S', 'M', 'L', 'XL'];
@@ -17,6 +17,8 @@ type Props = {
 
 export default function ProductPage({ params }: Props) {
   const { slug } = use(params);
+  const searchParams = useSearchParams();
+  const fromCategory = searchParams.get('from');
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -166,7 +168,7 @@ export default function ProductPage({ params }: Props) {
                 </button>
               </div>
               <div className="flex flex-wrap gap-3">
-                {(product.category === 'womens' ? womensSizes : mensSizes).map((size) => (
+                {(fromCategory === 'womens' || product.category === 'womens' ? womensSizes : mensSizes).map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}

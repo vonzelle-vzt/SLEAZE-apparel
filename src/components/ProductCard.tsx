@@ -7,17 +7,22 @@ import type { Product } from '@/lib/supabase';
 
 type ProductCardProps = {
   product: Product;
+  fromCategory?: string;
 };
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, fromCategory }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   
   const primaryImage = product.product_images?.find(img => img.is_primary) || product.product_images?.[0];
   const secondaryImage = product.product_images?.find(img => !img.is_primary && img.position === 1);
 
+  const productUrl = fromCategory 
+    ? `/product/${product.slug}?from=${fromCategory}`
+    : `/product/${product.slug}`;
+
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={productUrl}
       className="group block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
