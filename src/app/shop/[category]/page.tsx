@@ -1,7 +1,11 @@
-import { ProductGrid } from '@/components/ProductGrid';
-import { getProducts } from '@/lib/supabase';
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ProductGrid } from '@/components/ProductGrid';
+import { getProducts } from '@/lib/supabase';
+import type { Product } from '@/lib/supabase';
 
 const validCategories = ['mens', 'womens', 'new', 'xtreme'];
 
@@ -9,26 +13,26 @@ const categoryLabels: Record<string, string> = {
   mens: 'MENS',
   womens: 'WOMENS',
   new: 'NEW ARRIVALS',
-  xtreme: 'XTREME',
+  xtreme: 'XTREME GEAR',
 };
 
 const categoryDescriptions: Record<string, string> = {
-  mens: 'Bold streetwear for the modern man',
-  womens: 'Fierce fashion for fearless women',
-  new: 'Fresh styles just landed',
-  xtreme: 'Built for the extreme',
+  mens: 'Bold streetwear for the modern man.',
+  womens: 'Fierce fashion for the fearless.',
+  new: 'Be the first to cop the latest drops.',
+  xtreme: 'Built for the extreme lifestyle.',
 };
 
 const categories = [
-  { slug: '', label: 'SHOP' },
-  { slug: 'mens', label: 'MENS' },
-  { slug: 'womens', label: 'WOMENS' },
-  { slug: 'xtreme', label: 'XTREME' },
-  { slug: 'new', label: 'NEW ARRIVALS' },
+  { name: 'SHOP', slug: '' },
+  { name: 'MENS', slug: 'mens' },
+  { name: 'WOMENS', slug: 'womens' },
+  { name: 'NEW ARRIVALS', slug: 'new' },
+  { name: 'XTREME', slug: 'xtreme' },
 ];
 
-// All products - same as View All page
-const mockProducts = [
+const mockProducts: Product[] = [
+  // Row 1: Sleaze Tee, Blow My Mind Tee, Blow My Mind Hoodie, Eat-Sleep-Think-Cash Tee
   {
     id: '1',
     shopify_product_id: 'gid://shopify/Product/1',
@@ -93,6 +97,7 @@ const mockProducts = [
     product_images: [{ id: '4', product_id: '4', url: '/products/image3.png', alt_text: 'Eat Sleep Think Cash Tee', position: 0, is_primary: true }],
     product_variants: []
   },
+  // Row 2: I Do Very Bad Things Hoodie, Mad Mon Tee, SLEAZE Mad Mon Tee, CheapWork Hoodie
   {
     id: '5',
     shopify_product_id: 'gid://shopify/Product/5',
@@ -157,6 +162,7 @@ const mockProducts = [
     product_images: [{ id: '8', product_id: '8', url: '/products/image7.png', alt_text: 'CheapWork Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
+  // Row 3: SLEAZE Joker Tee, SLEAZE Racer Hoodie, All Eyes On Me Hoodie, SLEAZED Out Gym Hoodie
   {
     id: '9',
     shopify_product_id: 'gid://shopify/Product/9',
@@ -221,12 +227,13 @@ const mockProducts = [
     product_images: [{ id: '12', product_id: '12', url: '/products/image13.jpeg', alt_text: 'SLEAZED Out Gym Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
+  // Row 4: SLEAZE Zip-up Hoodie (merged), Dr. Sleaze Crew Sweatshirt, Dogs Gotta Eat Hoodie, SLEAZE Martian Hoodie
   {
     id: '13',
     shopify_product_id: 'gid://shopify/Product/13',
     name: 'SLEAZE ZIP-UP HOODIE',
     slug: 'sleaze-zip-up-hoodie',
-    description: 'SLEAZE Zip-up hoodie',
+    description: 'SLEAZE Zip-up hoodie with front zip and SLEAZE back print',
     price: 99.99,
     compare_at_price: null,
     category: 'mens' as const,
@@ -288,6 +295,7 @@ const mockProducts = [
     product_images: [{ id: '16', product_id: '16', url: '/products/image20.png', alt_text: 'SLEAZE Martian Hoodie', position: 0, is_primary: true }],
     product_variants: []
   },
+  // Row 5: SLEAZE UFO Hoodie, Xtreme Sports Long Sleeve (merged)
   {
     id: '17',
     shopify_product_id: 'gid://shopify/Product/17',
@@ -323,13 +331,13 @@ const mockProducts = [
     ],
     product_variants: []
   },
-  // XTREME category products
+  // Xtreme category products
   {
     id: '19',
     shopify_product_id: 'gid://shopify/Product/19',
     name: 'XTREME SPORTS LONG SLEEVE',
     slug: 'xtreme-sports-long-sleeve-xtreme',
-    description: 'Xtreme Sports Long Sleeve - Built for extreme action',
+    description: 'Xtreme Sports Long Sleeve - Extreme gear',
     price: 59.99,
     compare_at_price: null,
     category: 'xtreme' as const,
@@ -357,6 +365,22 @@ const mockProducts = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     product_images: [{ id: '20', product_id: '20', url: '/products/image10.jpeg', alt_text: 'SLEAZE Racer Hoodie', position: 0, is_primary: true }],
+    product_variants: []
+  },
+  {
+    id: '21',
+    shopify_product_id: 'gid://shopify/Product/21',
+    name: "DON'T CRASH TEE",
+    slug: 'dont-crash-tee',
+    description: "Don't Crash Tee - Bold statement piece",
+    price: 49.99,
+    compare_at_price: null,
+    category: 'mens' as const,
+    featured: true,
+    active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    product_images: [{ id: '21', product_id: '21', url: '/products/image24.png', alt_text: "Don't Crash Tee", position: 0, is_primary: true }],
     product_variants: []
   },
 ];
@@ -393,9 +417,11 @@ export default async function CategoryPage({ params }: Props) {
     products = mockProducts;
   }
 
-  // Filter by xtreme category if on xtreme page
+  // Filter by xtreme category if on xtreme page, exclude xtreme from mens/womens
   if (category === 'xtreme') {
     products = products.filter(p => p.category === 'xtreme');
+  } else if (category === 'mens' || category === 'womens') {
+    products = products.filter(p => p.category !== 'xtreme');
   }
 
   const label = categoryLabels[category];
@@ -414,27 +440,26 @@ export default async function CategoryPage({ params }: Props) {
         </p>
       </section>
 
-      {/* Category Filter */}
-      <div className="px-4 sm:px-6 lg:px-8 mb-8">
+      {/* Category Navigation */}
+      <nav className="px-4 sm:px-6 lg:px-8 mb-8">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-4">
-          {categories.map(cat => (
+          {categories.map((cat) => (
             <Link
               key={cat.slug}
               href={cat.slug ? `/shop/${cat.slug}` : '/shop'}
-              className={`px-6 py-2 font-[family-name:var(--font-bebas)] tracking-wider transition-colors ${
+              className={`px-6 py-2 font-[family-name:var(--font-bebas)] text-lg tracking-wider transition-all ${
                 cat.slug === category
                   ? 'bg-red text-cream'
                   : 'glass-light text-cream/60 hover:text-cream hover:bg-cream/10'
               }`}
             >
-              {cat.label}
+              {cat.name}
             </Link>
           ))}
         </div>
-      </div>
+      </nav>
 
       <ProductGrid products={products} fromCategory={category} />
     </div>
   );
 }
-
